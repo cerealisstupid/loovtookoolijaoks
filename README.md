@@ -1,2 +1,1 @@
-Loovtöõ 2025
-Autoriõigustega kaitstud.
+# Neocities v1 - Alpha push
