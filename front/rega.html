@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <title>Tamsalu Gümnaasium</title>
+    <link rel="icon" type="image/x-icon" href="https://assets.stuudium.net/logos/tamsalu/35/2x">
+    <link rel="stylesheet" href="/back/style.css">
+</head>
+<body>
+
+    <!-- Ülemine päis -->
+    <div class="top-bar">
+        <div class="logo-section">
+            <img src="https://assets.stuudium.net/logos/tamsalu/35/2x" alt="Tamsalu logo" class="logo">
+            <div>
+                <div class="school-name">Tamsalu Kool</div>
+                <div class="tagline">Kindlad juured, julged sammud</div>
+            </div>
+        </div>
+        <div class="right-section">ajutine hoidja siin</div>
+    </div>
+
+    <!-- Põhisisu -->
+    <div class="content">
+        <!-- Breakfast Registration -->
+        <h3>Tere tulemast Tamsalu Gümnaasiumi Pudrulehele!</h3>
+        <i>Palume mitte teil registeerida kui te ei tule!</i>
+        <br>
+        <i>Hetkel registreeitud...</i>
+        <br>
+        <ul id="nimekiri"></ul>
+        <button id="reg">Registreeri</button>
+        <button id="unreg">Võta nimekirjast välja</button>
+
+        <hr>
+
+        <!-- Teacher Consultation Registration -->
+        <h3>Õpetajaga Konsultatsiooni Registreerimine</h3>
+        <select id="classSelect">
+            <option value="">Vali klass</option>
+        </select>
+        <select id="slotSelect">
+            <option value="">Vali aeg / õpetaja / aine</option>
+        </select>
+        <br><br>
+        <button id="regSlot">Registreeri</button>
+        <button id="unregSlot">Eemalda registreering</button>
+        <ul id="slotList"></ul>
+    </div>
+
+    <script src="back/script.js"></script>
+    <noscript>Palun lubage JavaScripti, et registreeruda või nimekirjast välja võtta.</noscript>
+
+</body>
+</html>

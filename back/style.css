@@ -11,29 +11,29 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 20px;     /* väiksem paksus */
+    padding: 5px 20px;     
 }
 
 .logo {
-    width: 35px;           /* väiksem logo */
+    width: 35px;           
     height: 35px;
     border-radius: 4px;
 }
 
 .school-name {
     font-weight: 600;
-    font-size: 1em;        /* väiksem tekst */
+    font-size: 1em;      
 }
 
 .tagline {
     font-style: italic;
-    font-size: 0.9em;      /* väiksem moto */
+    font-size: 0.9em;      
     color: #dcdcf5;
 }
 
 .right-section {
     font-weight: normal;
-    font-size: 0.8em;      /* väiksem parempoolne tekst */
+    font-size: 0.8em;     
 }
 
 
@@ -81,4 +81,13 @@ button:hover {
     display: flex;
     justify-content: center;
     
+}
+
+.top-bar2 {
+    background-color: #2e3192;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;     
 }

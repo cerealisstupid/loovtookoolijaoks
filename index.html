@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Tamsalu Kool</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      font-family: sans-serif;
+    }
+
+    .split {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: 0.4s;
+    }
+
+    .left {
+      background: linear-gradient(135deg, #2a2a2a 0%, #555 100%);
+      border-right: 2px solid #000;
+    }
+
+    .right {
+      background: linear-gradient(315deg, #444 0%, #111 100%);
+      border-left: 2px solid #000;
+    }
+
+    .split:hover {
+      filter: brightness(1.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="split left" onclick="window.location='/front/rega.html'">
+    Registreerimised
+  </div>
+  <div class="split right" onclick="window.location='/front/opinfo.html'">
+    Kooli info
+  </div>
+</body>
+</html>

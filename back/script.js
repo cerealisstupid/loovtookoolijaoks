@@ -1,27 +1,41 @@
-document.getElementById("reg").onclick = function() {
-    const nimi = prompt("Sisesta nimi, mida lisada:");
-    if (!nimi) return; // kui vajutati cancel või jäeti tühjaks
+async function loadList() {
+    const res = await fetch("api/list.php");
+    const names = await res.json();
 
-    // loo <li> element
-    const li = document.createElement("li");
-    li.textContent = nimi;
-    li.id = "nimi-" + nimi.toLowerCase().replace(/\s+/g, "-");
+    const ul = document.getElementById("nimekiri");
+    ul.innerHTML = "";
 
-    document.getElementById("nimekiri").appendChild(li);
-    alert("Lisatud: " + nimi);
+    names.forEach(name => {
+        const li = document.createElement("li");
+        li.textContent = name;
+        ul.appendChild(li);
+    });
 }
 
-document.getElementById("unreg").onclick = function() {
+document.getElementById("reg").onclick = async () => {
+    const nimi = prompt("Sisesta nimi:");
+    if (!nimi) return;
+
+    await fetch("api/add.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "name=" + encodeURIComponent(nimi)
+    });
+
+    loadList();
+};
+
+document.getElementById("unreg").onclick = async () => {
     const nimi = prompt("Sisesta nimi, mida eemaldada:");
     if (!nimi) return;
 
-    const id = "nimi-" + nimi.toLowerCase().replace(/\s+/g, "-");
-    const li = document.getElementById(id);
+    await fetch("api/remove.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "name=" + encodeURIComponent(nimi)
+    });
 
-    if (li) {
-        li.remove();
-        alert("Eemaldatud: " + nimi);
-    } else {
-        alert("Nime '" + nimi + "' ei leitud nimekirjas!");
-    }
-}
+    loadList();
+};
+
+loadList();
