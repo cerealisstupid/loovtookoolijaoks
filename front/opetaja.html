@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <title>Tamsalu Gümnaasium</title>
+    <link rel="icon" type="image/x-icon" href="https://assets.stuudium.net/logos/tamsalu/35/2x">
+    <link rel="stylesheet" href="/back/stiil.css">
+    <style>
+        .opetaja-paneel {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .vormi-grupp {
+            margin-bottom: 15px;
+        }
+        
+        .vormi-grupp label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .vormi-grupp input, 
+        .vormi-grupp select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .nupp {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .nupp-peamine {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .nupp-ohtlik {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        .nupp-teine {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        .nupp:hover {
+            opacity: 0.9;
+        }
+        
+        .aja-kaart {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            background: #f9f9f9;
+        }
+        
+        .aja-kaart h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        
+        .aja-info {
+            margin: 5px 0;
+            color: #666;
+        }
+        
+        .aja-tegevused {
+            margin-top: 10px;
+        }
+        
+        .teade {
+            padding: 10px 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .teade.edukas {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .teade.viga {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        
+        .peidetud {
+            display: none;
+        }
+        
+        .sisselogimise-vorm {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="logo-section">
+            <img src="https://assets.stuudium.net/logos/tamsalu/35/2x" alt="Tamsalu logo" class="logo">
+            <div>
+                <div class="school-name">Tamsalu Kool</div>
+                <div class="tagline">Õpetaja Paneel</div>
+            </div>
+        </div>
+        <div class="right-section">
+            <span id="opetajaNimi"></span>
+            <button id="valja-nupp" class="nupp nupp-teine peidetud">Logi välja</button>
+        </div>
+    </div>
+
+    <div id="sisselogimiseSektsioon" class="sisselogimise-vorm">
+        <h2>Õpetaja Sisselogimine</h2>
+        <div class="vormi-grupp">
+            <label for="nimiSisend">Õpetaja Nimi:</label>
+            <input type="text" id="nimiSisend" placeholder="Mari Mets">
+        </div>
+        <div class="vormi-grupp">
+            <label for="paroolSisend">Parool:</label>
+            <input type="password" id="paroolSisend" placeholder="Parool">
+        </div>
+        <button id="sisseNupp" class="nupp nupp-peamine">Logi sisse</button>
+        <p style="margin-top: 15px; color: #666; font-size: 12px;">
+            Demo parool: "opetaja123"
+        </p>
+    </div>
+
+    <div id="opetajaPaneel" class="peidetud">
+        <div class="opetaja-paneel">
+            <h2>Loo Uus Konsultatsioon</h2>
+            
+            <div class="vormi-grupp">
+                <label for="aineVali">Aine:</label>
+                <input type="text" id="aineVali" placeholder="Matemaatika">
+            </div>
+            
+            <div class="vormi-grupp">
+                <label for="klassiVali">Klass:</label>
+                <select id="klassiVali">
+                    <option value="">Vali klass</option>
+                    <option value="10">10. klass</option>
+                    <option value="11">11. klass</option>
+                    <option value="12">12. klass</option>
+                </select>
+            </div>
+            
+            <div class="vormi-grupp">
+                <label for="kuupaevVali">Kuupäev:</label>
+                <input type="date" id="kuupaevVali">
+            </div>
+            
+            <div class="vormi-grupp">
+                <label for="algusaegVali">Algusaeg:</label>
+                <input type="time" id="algusaegVali" value="14:00">
+            </div>
+            
+            <div class="vormi-grupp">
+                <label for="loppaeaVali">Lõppaeg:</label>
+                <input type="time" id="loppaeaVali" value="14:30">
+            </div>
+            
+            <div class="vormi-grupp">
+                <label for="maksimumiVali">Max õpilasi:</label>
+                <input type="number" id="maksimumiVali" value="1" min="1" max="10">
+            </div>
+            
+            <button id="looAjaNupp" class="nupp nupp-peamine">Loo Konsultatsioon</button>
+            
+            <hr style="margin: 30px 0;">
+            
+            <h2>Minu Konsultatsioonid</h2>
+            <div id="minuAjad"></div>
+        </div>
+    </div>
+
+    <script>
+        let hetkeOpetaja = null;
+
+        function naitaTeade(teade, liik = 'info') {
+            const olemasolevTeade = document.querySelector('.teade');
+            if (olemasolevTeade) olemasolevTeade.remove();
+
+            const teadeDiv = document.createElement('div');
+            teadeDiv.className = `teade ${liik}`;
+            teadeDiv.textContent = teade;
+            
+            const paneel = document.querySelector('.opetaja-paneel') || document.querySelector('.sisselogimise-vorm');
+            paneel.insertBefore(teadeDiv, paneel.firstChild);
+            
+            setTimeout(() => teadeDiv.remove(), 5000);
+        }
+
+        document.getElementById('sisseNupp').onclick = () => {
+            const nimi = document.getElementById('nimiSisend').value.trim();
+            const parool = document.getElementById('paroolSisend').value;
+
+            if (!nimi) {
+                naitaTeade('Palun sisesta nimi!', 'viga');
+                return;
+            }
+
+            if (parool !== 'opetaja123') {
+                naitaTeade('Vale parool!', 'viga');
+                return;
+            }
+
+            hetkeOpetaja = nimi;
+            document.getElementById('opetajaNimi').textContent = nimi;
+            document.getElementById('sisselogimiseSektsioon').classList.add('peidetud');
+            document.getElementById('opetajaPaneel').classList.remove('peidetud');
+            document.getElementById('valja-nupp').classList.remove('peidetud');
+            
+            laadMinuAjad();
+        };
+
+        document.getElementById('valja-nupp').onclick = () => {
+            hetkeOpetaja = null;
+            document.getElementById('sisselogimiseSektsioon').classList.remove('peidetud');
+            document.getElementById('opetajaPaneel').classList.add('peidetud');
+            document.getElementById('valja-nupp').classList.add('peidetud');
+            document.getElementById('nimiSisend').value = '';
+            document.getElementById('paroolSisend').value = '';
+        };
+
+        document.getElementById('looAjaNupp').onclick = async () => {
+            try {
+                const aine = document.getElementById('aineVali').value.trim();
+                const klass = document.getElementById('klassiVali').value;
+                const kuupaev = document.getElementById('kuupaevVali').value;
+                const algusaeg = document.getElementById('algusaegVali').value;
+                const loppaeg = document.getElementById('loppaeaVali').value;
+                const maksimum = parseInt(document.getElementById('maksimumiVali').value);
+
+                if (!aine || !klass || !kuupaev || !algusaeg || !loppaeg) {
+                    throw new Error('Palun täida kõik väljad!');
+                }
+
+                const vastus = await fetch('api/loo_aeg.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        teacher: hetkeOpetaja,
+                        subject: aine,
+                        class: klass,
+                        date: kuupaev,
+                        timeStart: algusaeg,
+                        timeEnd: loppaeg,
+                        maxStudents: maksimum
+                    })
+                });
+
+                const andmed = await vastus.json();
+                
+                if (andmed.error) {
+                    throw new Error(andmed.error);
+                }
+
+                naitaTeade(andmed.message || 'Konsultatsioon loodud!', 'edukas');
+                
+                document.getElementById('aineVali').value = '';
+                document.getElementById('klassiVali').value = '';
+                document.getElementById('kuupaevVali').value = '';
+                document.getElementById('algusaegVali').value = '14:00';
+                document.getElementById('loppaeaVali').value = '14:30';
+                document.getElementById('maksimumiVali').value = '1';
+                
+                laadMinuAjad();
+                
+            } catch (viga) {
+                naitaTeade(viga.message, 'viga');
+            }
+        };
+
+        async function laadMinuAjad() {
+            try {
+                const vastus = await fetch('api/lae_ajad.php?teacher=' + encodeURIComponent(hetkeOpetaja));
+                const andmed = await vastus.json();
+                
+                if (andmed.error) {
+                    throw new Error(andmed.error);
+                }
+
+                const ajad = andmed.slots || [];
+                const konteiner = document.getElementById('minuAjad');
+                konteiner.innerHTML = '';
+
+                if (ajad.length === 0) {
+                    konteiner.innerHTML = '<p style="color: #666; font-style: italic;">Sul pole veel konsultatsioone loodud.</p>';
+                    return;
+                }
+
+                ajad.forEach(aeg => {
+                    const kaart = document.createElement('div');
+                    kaart.className = 'aja-kaart';
+                    
+                    const registreeringud = aeg.registrations || [];
+                    const onTais = registreeringud.length >= aeg.maxStudents;
+                    
+                    kaart.innerHTML = `
+                        <h4>${aeg.subject} - ${aeg.class}. klass</h4>
+                        <div class="aja-info">📅 ${aeg.date}</div>
+                        <div class="aja-info">🕐 ${aeg.timeStart} - ${aeg.timeEnd}</div>
+                        <div class="aja-info">👥 Registreerunud: ${registreeringud.length}/${aeg.maxStudents}</div>
+                        ${registreeringud.length > 0 ? `
+                            <div class="aja-info"><strong>Õpilased:</strong> ${registreeringud.map(r => r.studentName).join(', ')}</div>
+                        ` : ''}
+                        ${onTais ? '<div class="aja-info" style="color: #f44336;">⚠️ Täis!</div>' : ''}
+                        <div class="aja-tegevused">
+                            <button class="nupp nupp-ohtlik" onclick="kustutaAeg(${aeg.id})">Kustuta</button>
+                        </div>
+                    `;
+                    
+                    konteiner.appendChild(kaart);
+                });
+                
+            } catch (viga) {
+                naitaTeade('Viga konsultatsioonide laadimisel: ' + viga.message, 'viga');
+            }
+        }
+
+        async function kustutaAeg(aegId) {
+            if (!confirm('Kas oled kindel, et soovid selle konsultatsiooni kustutada?')) {
+                return;
+            }
+
+            try {
+                const vastus = await fetch('api/kustuta_aeg.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ slotId: aegId, teacher: hetkeOpetaja })
+                });
+
+                const andmed = await vastus.json();
+                
+                if (andmed.error) {
+                    throw new Error(andmed.error);
+                }
+
+                naitaTeade(andmed.message || 'Konsultatsioon kustutatud!', 'edukas');
+                laadMinuAjad();
+                
+            } catch (viga) {
+                naitaTeade(viga.message, 'viga');
+            }
+        }
+
+        document.getElementById('kuupaevVali').valueAsDate = new Date();
+    </script>
+
+</body>
+</html>
