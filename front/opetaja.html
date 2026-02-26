@@ -2,9 +2,10 @@
 <html lang="et">
 <head>
     <meta charset="UTF-8">
-    <title>Tamsalu Gümnaasium</title>
+    <title>Tamsalu Kool</title>
     <link rel="icon" type="image/x-icon" href="https://assets.stuudium.net/logos/tamsalu/35/2x">
     <link rel="stylesheet" href="/back/stiil.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         .opetaja-paneel {
             max-width: 800px;
@@ -133,18 +134,25 @@
 
     <div id="sisselogimiseSektsioon" class="sisselogimise-vorm">
         <h2>Õpetaja Sisselogimine</h2>
-        <div class="vormi-grupp">
-            <label for="nimiSisend">Õpetaja Nimi:</label>
-            <input type="text" id="nimiSisend" placeholder="Mari Mets">
+        <p style="color: #666; margin-bottom: 20px; font-size: 14px;">Logi sisse oma Google kontoga</p>
+        
+        <!-- Google Identity Services -->
+        <div id="g_id_onload"
+            data-client_id="meow"
+            data-callback="handleGoogleLogin"
+            data-auto_prompt="false">
         </div>
-        <div class="vormi-grupp">
-            <label for="paroolSisend">Parool:</label>
-            <input type="password" id="paroolSisend" placeholder="Parool">
+        <div class="g_id_signin"
+            data-type="standard"
+            data-size="large"
+            data-theme="outline"
+            data-text="signin_with"
+            data-shape="rectangular"
+            data-logo_alignment="left"
+            data-locale="et">
         </div>
-        <button id="sisseNupp" class="nupp nupp-peamine">Logi sisse</button>
-        <p style="margin-top: 15px; color: #666; font-size: 12px;">
-            Demo parool: "opetaja123"
-        </p>
+        
+        <div id="loginViga" style="display:none; margin-top:15px; color:#c62828; font-size:13px;"></div>
     </div>
 
     <div id="opetajaPaneel" class="peidetud">
@@ -218,36 +226,34 @@
             setTimeout(() => teadeDiv.remove(), 5000);
         }
 
-        document.getElementById('sisseNupp').onclick = () => {
-            const nimi = document.getElementById('nimiSisend').value.trim();
-            const parool = document.getElementById('paroolSisend').value;
+        // Google OAuth callback
+        function handleGoogleLogin(response) {
+            try {
+                // JWT dekodeerimine
+                const payload = JSON.parse(atob(response.credential.split('.')[1]));
+                const nimi = payload.name;
 
-            if (!nimi) {
-                naitaTeade('Palun sisesta nimi!', 'viga');
-                return;
+                hetkeOpetaja = nimi;
+                document.getElementById('opetajaNimi').textContent = nimi;
+                document.getElementById('sisselogimiseSektsioon').classList.add('peidetud');
+                document.getElementById('opetajaPaneel').classList.remove('peidetud');
+                document.getElementById('valja-nupp').classList.remove('peidetud');
+
+                laadMinuAjad();
+            } catch (e) {
+                const viga = document.getElementById('loginViga');
+                viga.textContent = 'Sisselogimine ebaõnnestus. Proovi uuesti.';
+                viga.style.display = 'block';
             }
-
-            if (parool !== 'opetaja123') {
-                naitaTeade('Vale parool!', 'viga');
-                return;
-            }
-
-            hetkeOpetaja = nimi;
-            document.getElementById('opetajaNimi').textContent = nimi;
-            document.getElementById('sisselogimiseSektsioon').classList.add('peidetud');
-            document.getElementById('opetajaPaneel').classList.remove('peidetud');
-            document.getElementById('valja-nupp').classList.remove('peidetud');
-            
-            laadMinuAjad();
-        };
+        }
 
         document.getElementById('valja-nupp').onclick = () => {
             hetkeOpetaja = null;
+            google.accounts.id.disableAutoSelect();
             document.getElementById('sisselogimiseSektsioon').classList.remove('peidetud');
             document.getElementById('opetajaPaneel').classList.add('peidetud');
             document.getElementById('valja-nupp').classList.add('peidetud');
-            document.getElementById('nimiSisend').value = '';
-            document.getElementById('paroolSisend').value = '';
+            document.getElementById('opetajaNimi').textContent = '';
         };
 
         document.getElementById('looAjaNupp').onclick = async () => {
